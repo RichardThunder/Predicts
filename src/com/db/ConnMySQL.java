@@ -1,6 +1,11 @@
 package com.db;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.model.Forecast;
+import com.model.History;
 
 public class ConnMySQL {
 
@@ -51,6 +56,68 @@ public ResultSet showAll(String sql) {// 显示所有开奖信息
         e.printStackTrace();
     }
     return null;
+}
+public int getABC(String abc, int number) {// 获得进度条、统计标签中的数据
+    // 获得number(0~9)在历届开奖号码中第abc(a~g)位出现的总次数
+    String sql = "select count(" + abc + ") from tb_history where " + abc + "=" + number;
+    Statement statement = null;// 声明用于执行SQL语句的接口
+    int i = 0;// 初始化“开奖期数”
+    if (con == null) {// Connection对象为空
+        creatConnection();// 建立MySQL数据库的连接
+    }
+    try {
+        statement = con.createStatement();// 创建执行SQL语句的Statement对象
+        ResultSet rs = statement.executeQuery(sql);// 执行查询语句获得结果集
+        while (rs.next()) {// 遍历结果集
+            i = rs.getInt(1);// 获得“开奖期数”
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        closeStatement(statement);
+    }
+    return i;
+}
+public static void closeStatement(Statement stat) {// 关闭用于执行SQL语句的Statement对象
+    if (stat != null) {
+        try {
+            stat.close();
+        } catch (SQLException e) {
+            System.err.println("关闭数据库语句异常");
+            e.printStackTrace();
+        }
+    }
+}
+
+public static List<History> getFirstTenData() {// 获得最近10期的开奖结果
+    // 获得最近10期开奖号码的SQL语句
+    String sql = "SELECT * FROM tb_history ORDER BY number DESC LIMIT 10";
+    List<History> list = new ArrayList<>();// 存储最近10期开奖结果的集合
+    Statement statement = null;// 声明用于执行SQL语句的接口
+    if (con == null) {// Connection对象为空
+        creatConnection();// 建立MySQL数据库的连接
+    }
+    try {
+        statement = con.createStatement();// 创建执行SQL语句的Statement对象
+        ResultSet rs = statement.executeQuery(sql);// 执行查询语句获得结果集
+        while (rs.next()) {// 遍历结果集
+            History history = new History();// 创建历届开奖结果对象
+            history.setNumber(rs.getInt(2));// 获得开奖期数
+            history.setA(rs.getInt(3));// 获得第一位开奖号码
+            history.setB(rs.getInt(4));// 获得第二位开奖号码
+            history.setC(rs.getInt(5));// 获得第三位开奖号码
+            history.setD(rs.getInt(6));// 获得第四位开奖号码
+            history.setE(rs.getInt(7));// 获得第五位开奖号码
+            history.setF(rs.getInt(8));// 获得第六位开奖号码
+            history.setG(rs.getInt(9));// 获得第七位开奖号码
+            list.add(history);// 向集合中添加开奖结果对象
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        closeStatement(statement);
+    }
+    return list;// 返回存储最近10期开奖结果的集合
 }
 
 }

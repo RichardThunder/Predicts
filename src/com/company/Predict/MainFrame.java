@@ -17,21 +17,21 @@ import com.db.ConnMySQL;
 
 
 public class MainFrame extends JFrame {
-private JPanel jcontentPane;// å†…å®¹é¢æ¿
-private JButton firstPageButton;// é¦–é¡µ
-private JButton latePageButton;// å°¾é¡µ
-private JButton nextPageButton;// ä¸‹ä¸€é¡µ
-private JButton lastPageButton;// ä¸Šä¸€é¡µ
-private JTable table;// è¡¨æ ¼æ¨¡å‹
-private int maxPageNumber;// è¡¨æ ¼çš„æ€»é¡µæ•°
-private int maxrows = 0;// åˆå§‹åŒ–æœ€å¤§è¡Œæ•°ä¸º0
-private int currentPageNumber = 1;// åˆå§‹åŒ–è¡¨æ ¼çš„å½“å‰é¡µæ•°ä¸º1
-private double pageSize = 20;// æ¯é¡µè¡¨æ ¼å¯å®¹çº³20æ¡æ•°æ®
-private DefaultTableModel defaultModel;// è¡¨æ ¼æ¨¡å‹çš„å®ä¾‹å¯¹è±¡
+private JPanel jcontentPane;// ÄÚÈİÃæ°å
+private JButton firstPageButton;// Ê×Ò³
+private JButton latePageButton;// Î²Ò³
+private JButton nextPageButton;// ÏÂÒ»Ò³
+private JButton lastPageButton;// ÉÏÒ»Ò³
+private JTable table;// ±í¸ñÄ£ĞÍ
+private int maxPageNumber;// ±í¸ñµÄ×ÜÒ³Êı
+private int maxrows = 0;// ³õÊ¼»¯×î´óĞĞÊıÎª0
+private int currentPageNumber = 1;// ³õÊ¼»¯±í¸ñµÄµ±Ç°Ò³ÊıÎª1
+private double pageSize = 20;// Ã¿Ò³±í¸ñ¿ÉÈİÄÉ20ÌõÊı¾İ
+private DefaultTableModel defaultModel;// ±í¸ñÄ£ĞÍµÄÊµÀı¶ÔÏó
 
 public static void main(String[] args) {
     try {
-        // è®¾ç½®ä¸»çª—ä½“é£æ ¼
+        // ÉèÖÃÖ÷´°Ìå·ç¸ñ
         UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
     } catch (Throwable e) {
         e.printStackTrace();
@@ -39,9 +39,9 @@ public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable() {
         public void run() {
             try {
-                // å®ä¾‹åŒ–ä¸»çª—ä½“
+                // ÊµÀı»¯Ö÷´°Ìå
                 MainFrame frame = new MainFrame();
-                frame.setVisible(true);// ä½¿ä¸»çª—ä½“å¯è§
+                frame.setVisible(true);// Ê¹Ö÷´°Ìå¿É¼û
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -49,278 +49,293 @@ public static void main(String[] args) {
     });
 }
 
-public MainFrame() {// ä¸»çª—ä½“çš„æ„é€ æ–¹æ³•
-    setForeground(Color.BLACK);// è®¾ç½®å‰æ™¯è‰²ä¸ºé»‘è‰²
-    setTitle("æ˜æ—¥å½©ç¥¨é¢„æµ‹ç³»ç»Ÿ");// ä¸»çª—ä½“çš„æ ‡é¢˜
-    setResizable(false);// ä¸»çª—ä½“ä¸èƒ½æ”¹å˜å¤§å°
-    // ä¸»çª—ä½“çš„æ ‡é¢˜å›¾æ ‡
+public MainFrame() {// Ö÷´°ÌåµÄ¹¹Ôì·½·¨
+    setForeground(Color.BLACK);// ÉèÖÃÇ°¾°É«ÎªºÚÉ«
+    setTitle("Ã÷ÈÕ²ÊÆ±Ô¤²âÏµÍ³");// Ö÷´°ÌåµÄ±êÌâ
+    setResizable(false);// Ö÷´°Ìå²»ÄÜ¸Ä±ä´óĞ¡
+    // Ö÷´°ÌåµÄ±êÌâÍ¼±ê
     setIconImage(
             Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/imgs/log.png"))
     );
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// å¯¹ç™»å½•çª—ä½“å‘èµ·â€œcloseâ€æ—¶ï¼Œé€€å‡ºåº”ç”¨ç¨‹åº
-    setBounds(200, 100, 1100, 600);// ç™»å½•çª—ä½“çš„ä½ç½®åŠå®½é«˜
-    jcontentPane = new JPanel();// å®ä¾‹åŒ–å†…å®¹é¢æ¿
-    jcontentPane.setLayout(new BorderLayout(0, 0));// è®¾ç½®å†…å®¹é¢æ¿çš„å¸ƒå±€ä¸ºè¾¹ç•Œå¸ƒå±€
-    setContentPane(jcontentPane);// æŠŠå†…å®¹é¢æ¿æ”¾å…¥ä¸»çª—ä½“ä¸­
-    BackgroundPanel contentPane = new BackgroundPanel();// åˆ›å»ºè‡ªå®šä¹‰èƒŒæ™¯é¢æ¿
-    // è®¾ç½®èƒŒæ™¯é¢æ¿çš„å›¾ç‰‡
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ¶ÔµÇÂ¼´°Ìå·¢Æğ¡°close¡±Ê±£¬ÍË³öÓ¦ÓÃ³ÌĞò
+    setBounds(200, 100, 1100, 600);// µÇÂ¼´°ÌåµÄÎ»ÖÃ¼°¿í¸ß
+    jcontentPane = new JPanel();// ÊµÀı»¯ÄÚÈİÃæ°å
+    jcontentPane.setLayout(new BorderLayout(0, 0));// ÉèÖÃÄÚÈİÃæ°åµÄ²¼¾ÖÎª±ß½ç²¼¾Ö
+    setContentPane(jcontentPane);// °ÑÄÚÈİÃæ°å·ÅÈëÖ÷´°ÌåÖĞ
+    BackgroundPanel contentPane = new BackgroundPanel();// ´´½¨×Ô¶¨Òå±³¾°Ãæ°å
+    // ÉèÖÃ±³¾°Ãæ°åµÄÍ¼Æ¬
     contentPane.setImage(getToolkit().getImage(getClass().getResource("/imgs/main.png")));
-    jcontentPane.add(contentPane, BorderLayout.CENTER);// æ·»åŠ èƒŒæ™¯é¢æ¿åˆ°å†…å®¹é¢æ¿
+    jcontentPane.add(contentPane, BorderLayout.CENTER);// Ìí¼Ó±³¾°Ãæ°åµ½ÄÚÈİÃæ°å
 
-    JButton btnNewButton = new JButton("");// â€œæ·»åŠ å¼€å¥–å·ç â€æŒ‰é’®
-    // è®¾ç½®â€œæ·»åŠ å¼€å¥–å·ç â€æŒ‰é’®çš„å›¾æ ‡
+    JButton btnNewButton = new JButton("");// ¡°Ìí¼Ó¿ª½±ºÅÂë¡±°´Å¥
+    // ÉèÖÃ¡°Ìí¼Ó¿ª½±ºÅÂë¡±°´Å¥µÄÍ¼±ê
     btnNewButton.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/10.png"))
     );
-    btnNewButton.setBounds(6, 114, 184, 40);// â€œæ·»åŠ å¼€å¥–å·ç â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(btnNewButton);// å°†â€œæ·»åŠ å¼€å¥–å·ç â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    JButton button = new JButton("");// â€œæŸ¥çœ‹å†å±Šå¼€å¥–â€æŒ‰é’®
-    // è®¾ç½®â€œæŸ¥çœ‹å†å±Šå¼€å¥–â€æŒ‰é’®çš„å›¾æ ‡
+    btnNewButton.setBounds(6, 114, 184, 40);// ¡°Ìí¼Ó¿ª½±ºÅÂë¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(btnNewButton);// ½«¡°Ìí¼Ó¿ª½±ºÅÂë¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    JButton button = new JButton("");// ¡°²é¿´Àú½ì¿ª½±¡±°´Å¥
+    // ÉèÖÃ¡°²é¿´Àú½ì¿ª½±¡±°´Å¥µÄÍ¼±ê
     button.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/09.png"))
     );
-    button.setBounds(6, 74, 184, 40);// â€œæŸ¥çœ‹å†å±Šå¼€å¥–â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(button);// å°†â€œæŸ¥çœ‹å†å±Šå¼€å¥–â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    JButton button_1 = new JButton("");// â€œæ‰¹é‡æ·»åŠ å·ç â€æŒ‰é’®
-    // è®¾ç½®â€œæ‰¹é‡æ·»åŠ å·ç â€æŒ‰é’®çš„å›¾æ ‡
+    button.setBounds(6, 74, 184, 40);// ¡°²é¿´Àú½ì¿ª½±¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(button);// ½«¡°²é¿´Àú½ì¿ª½±¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    JButton button_1 = new JButton("");// ¡°ÅúÁ¿Ìí¼ÓºÅÂë¡±°´Å¥
+    // ÉèÖÃ¡°ÅúÁ¿Ìí¼ÓºÅÂë¡±°´Å¥µÄÍ¼±ê
     button_1.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/11.png"))
     );
-    button_1.setBounds(6, 154, 184, 40);// â€œæ‰¹é‡æ·»åŠ å·ç â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(button_1);// å°†â€œæ‰¹é‡æ·»åŠ å·ç â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    JButton updatebutton = new JButton("");// â€œä¿®æ”¹å¼€å¥–å·ç â€æŒ‰é’®
-    // è®¾ç½®â€œä¿®æ”¹å¼€å¥–å·ç â€æŒ‰é’®çš„å›¾æ ‡
+    button_1.setBounds(6, 154, 184, 40);// ¡°ÅúÁ¿Ìí¼ÓºÅÂë¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(button_1);// ½«¡°ÅúÁ¿Ìí¼ÓºÅÂë¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    JButton updatebutton = new JButton("");// ¡°ĞŞ¸Ä¿ª½±ºÅÂë¡±°´Å¥
+    // ÉèÖÃ¡°ĞŞ¸Ä¿ª½±ºÅÂë¡±°´Å¥µÄÍ¼±ê
     updatebutton.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/12.png"))
     );
-    updatebutton.setBounds(6, 194, 184, 40);// â€œä¿®æ”¹å¼€å¥–å·ç â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(updatebutton);// å°†â€œä¿®æ”¹å¼€å¥–å·ç â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
+    updatebutton.setBounds(6, 194, 184, 40);// ¡°ĞŞ¸Ä¿ª½±ºÅÂë¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(updatebutton);// ½«¡°ĞŞ¸Ä¿ª½±ºÅÂë¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
 
-    JButton button_3 = new JButton("");// â€œæŸ¥çœ‹å·ç èµ°åŠ¿â€æŒ‰é’®
-    // è®¾ç½®â€œæŸ¥çœ‹å·ç èµ°åŠ¿â€æŒ‰é’®çš„å›¾æ ‡
+    JButton button_3 = new JButton("");// ¡°²é¿´ºÅÂë×ßÊÆ¡±°´Å¥
+    // ÉèÖÃ¡°²é¿´ºÅÂë×ßÊÆ¡±°´Å¥µÄÍ¼±ê
     button_3.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/14.png"))
     );
-    button_3.setBounds(6, 234, 184, 40);// â€œæŸ¥çœ‹å·ç èµ°åŠ¿â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(button_3);// å°†â€œæŸ¥çœ‹å·ç èµ°åŠ¿â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    JButton button_4 = new JButton("");// â€œéšæœºé€‰å·â€æŒ‰é’®
-    // è®¾ç½®â€œéšæœºé€‰å·â€æŒ‰é’®çš„å›¾æ ‡
+    button_3.setBounds(6, 234, 184, 40);// ¡°²é¿´ºÅÂë×ßÊÆ¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(button_3);// ½«¡°²é¿´ºÅÂë×ßÊÆ¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    JButton button_4 = new JButton("");// ¡°Ëæ»úÑ¡ºÅ¡±°´Å¥
+    // ÉèÖÃ¡°Ëæ»úÑ¡ºÅ¡±°´Å¥µÄÍ¼±ê
     button_4.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/15.png"))
     );
-    button_4.setBounds(6, 274, 184, 40);// â€œéšæœºé€‰å·â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(button_4);// å°†â€œéšæœºé€‰å·â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    JButton button_5 = new JButton("");// â€œä¸­å¥–æŸ¥è¯¢â€æŒ‰é’®
-    // è®¾ç½®â€œä¸­å¥–æŸ¥è¯¢â€æŒ‰é’®çš„å›¾æ ‡
+    button_4.setBounds(6, 274, 184, 40);// ¡°Ëæ»úÑ¡ºÅ¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(button_4);// ½«¡°Ëæ»úÑ¡ºÅ¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    JButton button_5 = new JButton("");// ¡°ÖĞ½±²éÑ¯¡±°´Å¥
+    // ÉèÖÃ¡°ÖĞ½±²éÑ¯¡±°´Å¥µÄÍ¼±ê
     button_5.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/17.png"))
     );
-    button_5.setBounds(6, 314, 184, 40);// â€œä¸­å¥–æŸ¥è¯¢â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(button_5);// å°†â€œä¸­å¥–æŸ¥è¯¢â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    JButton button_6 = new JButton("");// â€œå†å²æˆ˜ç»©â€æŒ‰é’®
-    // è®¾ç½®â€œå†å²æˆ˜ç»©â€æŒ‰é’®çš„å›¾æ ‡
+    button_5.setBounds(6, 314, 184, 40);// ¡°ÖĞ½±²éÑ¯¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(button_5);// ½«¡°ÖĞ½±²éÑ¯¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    JButton button_6 = new JButton("");// ¡°ÀúÊ·Õ½¼¨¡±°´Å¥
+    // ÉèÖÃ¡°ÀúÊ·Õ½¼¨¡±°´Å¥µÄÍ¼±ê
     button_6.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/18.png"))
     );
-    button_6.setBounds(6, 354, 184, 40);// â€œå†å²æˆ˜ç»©â€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(button_6);// å°†â€œå†å²æˆ˜ç»©â€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    JButton button_2 = new JButton("");// â€œé€€å‡ºç³»ç»Ÿâ€æŒ‰é’®
-    // è®¾ç½®â€œé€€å‡ºç³»ç»Ÿâ€æŒ‰é’®çš„å›¾æ ‡
+    button_6.setBounds(6, 354, 184, 40);// ¡°ÀúÊ·Õ½¼¨¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(button_6);// ½«¡°ÀúÊ·Õ½¼¨¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    JButton button_2 = new JButton("");// ¡°ÍË³öÏµÍ³¡±°´Å¥
+    // ÉèÖÃ¡°ÍË³öÏµÍ³¡±°´Å¥µÄÍ¼±ê
     button_2.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/08.png"))
     );
-    button_2.setBounds(6, 394, 184, 40);// â€œé€€å‡ºç³»ç»Ÿâ€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(button_2);// å°†â€œé€€å‡ºç³»ç»Ÿâ€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
+    button_2.setBounds(6, 394, 184, 40);// ¡°ÍË³öÏµÍ³¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(button_2);// ½«¡°ÍË³öÏµÍ³¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
 
-    JScrollPane scrollPane = new JScrollPane(); // æ»šåŠ¨é¢æ¿
-    scrollPane.setBackground(new Color(0, 51, 204)); // æ»šåŠ¨é¢æ¿èƒŒæ™¯è‰²
-    scrollPane.setBounds(217, 74, 848, 351); // æ»šåŠ¨é¢æ¿åœ¨ä¸»çª—ä½“ä¸­çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(scrollPane); // å°†æ»šåŠ¨é¢æ¿æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    table = new JTable(); // è¡¨æ ¼æ¨¡å‹
-    scrollPane.setViewportView(table); // å‘æ»šåŠ¨é¢æ¿ä¸­æ·»åŠ è¡¨æ ¼
-    firstPageButton = new JButton("é¦–   é¡µ"); // â€œé¦–é¡µâ€æŒ‰é’®
-    // è®¾ç½®â€œé¦–é¡µâ€æŒ‰é’®çš„å›¾æ ‡
+    JScrollPane scrollPane = new JScrollPane(); // ¹ö¶¯Ãæ°å
+    scrollPane.setBackground(new Color(0, 51, 204)); // ¹ö¶¯Ãæ°å±³¾°É«
+    scrollPane.setBounds(217, 74, 848, 351); // ¹ö¶¯Ãæ°åÔÚÖ÷´°ÌåÖĞµÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(scrollPane); // ½«¹ö¶¯Ãæ°åÌí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    table = new JTable(); // ±í¸ñÄ£ĞÍ
+    scrollPane.setViewportView(table); // Ïò¹ö¶¯Ãæ°åÖĞÌí¼Ó±í¸ñ
+    firstPageButton = new JButton("Ê×   Ò³"); // ¡°Ê×Ò³¡±°´Å¥
+    // ÉèÖÃ¡°Ê×Ò³¡±°´Å¥µÄÍ¼±ê
     firstPageButton.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/7_08.png")));
-    firstPageButton.setBounds(416, 439, 84, 27); // â€œé¦–é¡µâ€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(firstPageButton); // å°†â€œé¦–é¡µâ€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    latePageButton = new JButton("ä¸Šä¸€é¡µ"); // â€œä¸Šä¸€é¡µâ€æŒ‰é’®
-    // è®¾ç½®â€œä¸Šä¸€é¡µâ€æŒ‰é’®çš„å›¾æ ‡
+    firstPageButton.setBounds(416, 439, 84, 27); // ¡°Ê×Ò³¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(firstPageButton); // ½«¡°Ê×Ò³¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    latePageButton = new JButton("ÉÏÒ»Ò³"); // ¡°ÉÏÒ»Ò³¡±°´Å¥
+    // ÉèÖÃ¡°ÉÏÒ»Ò³¡±°´Å¥µÄÍ¼±ê
     latePageButton.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/7_10.png")));
-    latePageButton.setBounds(550, 439, 84, 27); // â€œä¸Šä¸€é¡µâ€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(latePageButton); // å°†â€œä¸Šä¸€é¡µâ€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    nextPageButton = new JButton("ä¸‹ä¸€é¡µ"); // â€œä¸‹ä¸€é¡µâ€æŒ‰é’®
-    // è®¾ç½®â€œä¸‹ä¸€é¡µâ€æŒ‰é’®çš„å›¾æ ‡
+    latePageButton.setBounds(550, 439, 84, 27); // ¡°ÉÏÒ»Ò³¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(latePageButton); // ½«¡°ÉÏÒ»Ò³¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    nextPageButton = new JButton("ÏÂÒ»Ò³"); // ¡°ÏÂÒ»Ò³¡±°´Å¥
+    // ÉèÖÃ¡°ÏÂÒ»Ò³¡±°´Å¥µÄÍ¼±ê
     nextPageButton.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/7_09.png")));
-    nextPageButton.setBounds(686, 439, 84, 27); // â€œä¸‹ä¸€é¡µâ€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(nextPageButton); // å°†â€œä¸‹ä¸€é¡µâ€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
-    lastPageButton = new JButton("å°¾   é¡µ"); // â€œå°¾é¡µâ€æŒ‰é’®
-    // è®¾ç½®â€œå°¾é¡µâ€æŒ‰é’®çš„å›¾æ ‡
+    nextPageButton.setBounds(686, 439, 84, 27); // ¡°ÏÂÒ»Ò³¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(nextPageButton); // ½«¡°ÏÂÒ»Ò³¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
+    lastPageButton = new JButton("Î²   Ò³"); // ¡°Î²Ò³¡±°´Å¥
+    // ÉèÖÃ¡°Î²Ò³¡±°´Å¥µÄÍ¼±ê
     lastPageButton.setIcon(
             new ImageIcon(MainFrame.class.getResource("/img_btn/7_11.png")));
-    lastPageButton.setBounds(819, 439, 84, 27); // â€œå°¾é¡µâ€æŒ‰é’®çš„ä½ç½®åŠå®½é«˜
-    contentPane.add(lastPageButton); // å°†â€œå°¾é¡µâ€æŒ‰é’®æ·»åŠ åˆ°è‡ªå®šä¹‰èƒŒæ™¯é¢æ¿ä¸­
+    lastPageButton.setBounds(819, 439, 84, 27); // ¡°Î²Ò³¡±°´Å¥µÄÎ»ÖÃ¼°¿í¸ß
+    contentPane.add(lastPageButton); // ½«¡°Î²Ò³¡±°´Å¥Ìí¼Óµ½×Ô¶¨Òå±³¾°Ãæ°åÖĞ
 
     latePageButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            do_latePageButton_actionPerformed(e);// ä¸ºâ€œä¸Šä¸€é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+            do_latePageButton_actionPerformed(e);// Îª¡°ÉÏÒ»Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
         }
     });
     nextPageButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            do_nextPageButton_actionPerformed(e);// ä¸ºâ€œä¸‹ä¸€é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+            do_nextPageButton_actionPerformed(e);// Îª¡°ÏÂÒ»Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
         }
     });
 
-
-    selecttable();//åˆ†é¡µæ˜¾ç¤ºå¼€å¥–å·ç çš„æ–¹æ³•
-
     firstPageButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            do_firstPageButton_actionPerformed(e);// ä¸ºâ€œé¦–é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+            do_firstPageButton_actionPerformed(e);// Îª¡°Ê×Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
         }
     });
     lastPageButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            do_lastPageButton_actionPerformed(e);// ä¸ºâ€œå°¾é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+            do_lastPageButton_actionPerformed(e);// Îª¡°Î²Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
         }
     });
 
+
+    button_3.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            do_button_3_actionPerformed(e);// Îª¡°²é¿´ºÅÂë×ßÊÆ¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
+        }
+    });
+
+    selecttable();//·ÖÒ³ÏÔÊ¾¿ª½±ºÅÂëµÄ·½·¨
+
+
+
 }
 
-// â€œä¸Šä¸€é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+// ¡°²é¿´ºÅÂë×ßÊÆ¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
+protected void do_button_3_actionPerformed(ActionEvent e) {
+    SparBuoy sparBuoy = new SparBuoy();// ºÅÂë×ßÊÆ¶Ô»°¿ò
+    sparBuoy.setVisible(true);// Ê¹ºÅÂë×ßÊÆ¶Ô»°¿ò¿É¼û
+}
+
+
+// ¡°ÉÏÒ»Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
 protected void do_latePageButton_actionPerformed(ActionEvent e) {
-    currentPageNumber--;// å°†å½“å‰é¡µé¢å‡ä¸€
-    Vector dataVector = defaultModel.getDataVector();// è·å¾—åŸè¡¨æ ¼æ¨¡å‹ä¸­çš„æ•°æ®
-    DefaultTableModel newModel = new DefaultTableModel();// åˆ›å»ºæ–°çš„è¡¨æ ¼æ¨¡å‹
-    // å®šä¹‰è¡¨å¤´
+    currentPageNumber--;// ½«µ±Ç°Ò³Ãæ¼õÒ»
+    Vector dataVector = defaultModel.getDataVector();// »ñµÃÔ­±í¸ñÄ£ĞÍÖĞµÄÊı¾İ
+    DefaultTableModel newModel = new DefaultTableModel();// ´´½¨ĞÂµÄ±í¸ñÄ£ĞÍ
+    // ¶¨Òå±íÍ·
     newModel.setColumnIdentifiers(new Object[]
-            { "æœŸæ•°", "ç¬¬1ä½", "ç¬¬2ä½", "ç¬¬3ä½", "ç¬¬4ä½", "ç¬¬5ä½", "ç¬¬6ä½", "ç¬¬7ä½", "å¼€å¥–æ—¶é—´" });
+            { "ÆÚÊı", "µÚ1Î»", "µÚ2Î»", "µÚ3Î»", "µÚ4Î»", "µÚ5Î»", "µÚ6Î»", "µÚ7Î»", "¿ª½±Ê±¼ä" });
     for (int i = 0; i < pageSize; i++) {
-        // æ ¹æ®é¡µé¢å¤§å°æ¥è·å¾—æ•°æ®
+        // ¸ù¾İÒ³Ãæ´óĞ¡À´»ñµÃÊı¾İ
         newModel.addRow(
                 (Vector) dataVector.elementAt((int) (pageSize * (currentPageNumber - 1) + i))
         );
     }
     table.getTableHeader().setReorderingAllowed(false);
-    table.setModel(newModel);// è®¾ç½®è¡¨æ ¼æ¨¡å‹
+    table.setModel(newModel);// ÉèÖÃ±í¸ñÄ£ĞÍ
     if (currentPageNumber == 1) {
-        firstPageButton.setEnabled(false);// ç¦ç”¨â€œé¦–é¡µâ€æŒ‰é’®
-        latePageButton.setEnabled(false);// ç¦ç”¨â€œä¸Šä¸€é¡µâ€æŒ‰é’®
+        firstPageButton.setEnabled(false);// ½ûÓÃ¡°Ê×Ò³¡±°´Å¥
+        latePageButton.setEnabled(false);// ½ûÓÃ¡°ÉÏÒ»Ò³¡±°´Å¥
     }
-    nextPageButton.setEnabled(true);// å¯ç”¨â€œä¸‹ä¸€é¡µâ€æŒ‰é’®
-    lastPageButton.setEnabled(true);// å¯ç”¨â€œå°¾é¡µâ€æŒ‰é’®
+    nextPageButton.setEnabled(true);// ÆôÓÃ¡°ÏÂÒ»Ò³¡±°´Å¥
+    lastPageButton.setEnabled(true);// ÆôÓÃ¡°Î²Ò³¡±°´Å¥
 }
-// â€œä¸‹ä¸€é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+// ¡°ÏÂÒ»Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
 protected void do_nextPageButton_actionPerformed(ActionEvent e) {
-    currentPageNumber++;// å°†å½“å‰é¡µé¢åŠ ä¸€
-    Vector dataVector = defaultModel.getDataVector();// è·å¾—åŸè¡¨æ ¼æ¨¡å‹ä¸­çš„æ•°æ®
-    DefaultTableModel newModel = new DefaultTableModel();// åˆ›å»ºæ–°çš„è¡¨æ ¼æ¨¡å‹
-    // å®šä¹‰è¡¨å¤´
+    currentPageNumber++;// ½«µ±Ç°Ò³Ãæ¼ÓÒ»
+    Vector dataVector = defaultModel.getDataVector();// »ñµÃÔ­±í¸ñÄ£ĞÍÖĞµÄÊı¾İ
+    DefaultTableModel newModel = new DefaultTableModel();// ´´½¨ĞÂµÄ±í¸ñÄ£ĞÍ
+    // ¶¨Òå±íÍ·
     newModel.setColumnIdentifiers(new Object[]
-            { "æœŸæ•°", "ç¬¬1ä½", "ç¬¬2ä½", "ç¬¬3ä½", "ç¬¬4ä½", "ç¬¬5ä½", "ç¬¬6ä½", "ç¬¬7ä½", "å¼€å¥–æ—¶é—´" });
+            { "ÆÚÊı", "µÚ1Î»", "µÚ2Î»", "µÚ3Î»", "µÚ4Î»", "µÚ5Î»", "µÚ6Î»", "µÚ7Î»", "¿ª½±Ê±¼ä" });
     if (currentPageNumber == maxPageNumber) {
         int lastPageSize = (int)
                 (defaultModel.getRowCount() - pageSize * (maxPageNumber - 1));
         for (int i = 0; i < lastPageSize; i++) {
-            // æ ¹æ®é¡µé¢å¤§å°æ¥è·å¾—æ•°æ®
+            // ¸ù¾İÒ³Ãæ´óĞ¡À´»ñµÃÊı¾İ
             newModel.addRow(
                     (Vector) dataVector.elementAt((int) (pageSize * (maxPageNumber - 1) + i))
             );
         }
-        nextPageButton.setEnabled(false);// ç¦ç”¨â€œä¸‹ä¸€é¡µâ€æŒ‰é’®
-        lastPageButton.setEnabled(false);// ç¦ç”¨â€œå°¾é¡µâ€æŒ‰é’®
+        nextPageButton.setEnabled(false);// ½ûÓÃ¡°ÏÂÒ»Ò³¡±°´Å¥
+        lastPageButton.setEnabled(false);// ½ûÓÃ¡°Î²Ò³¡±°´Å¥
     } else {
         for (int i = 0; i < pageSize; i++) {
-            // æ ¹æ®é¡µé¢å¤§å°æ¥è·å¾—æ•°æ®
+            // ¸ù¾İÒ³Ãæ´óĞ¡À´»ñµÃÊı¾İ
             newModel.addRow(
                     (Vector) dataVector.elementAt((int) (pageSize * (currentPageNumber - 1) + i))
             );
         }
     }
     table.getTableHeader().setReorderingAllowed(false);
-    table.setModel(newModel);// è®¾ç½®è¡¨æ ¼æ¨¡å‹
-    firstPageButton.setEnabled(true);// å¯ç”¨â€œé¦–é¡µâ€æŒ‰é’®
-    latePageButton.setEnabled(true);// å¯ç”¨â€œä¸Šä¸€é¡µâ€æŒ‰é’®
+    table.setModel(newModel);// ÉèÖÃ±í¸ñÄ£ĞÍ
+    firstPageButton.setEnabled(true);// ÆôÓÃ¡°Ê×Ò³¡±°´Å¥
+    latePageButton.setEnabled(true);// ÆôÓÃ¡°ÉÏÒ»Ò³¡±°´Å¥
 }
 
-// â€œé¦–é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+// ¡°Ê×Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
 protected void do_firstPageButton_actionPerformed(ActionEvent e) {
-    currentPageNumber = 1;// å°†å½“å‰é¡µç è®¾ç½®æˆ1
-    Vector dataVector = defaultModel.getDataVector();// è·å¾—åŸè¡¨æ ¼æ¨¡å‹ä¸­çš„æ•°æ®
-    DefaultTableModel newModel = new DefaultTableModel();// åˆ›å»ºæ–°çš„è¡¨æ ¼æ¨¡å‹
-    // å®šä¹‰è¡¨å¤´
+    currentPageNumber = 1;// ½«µ±Ç°Ò³ÂëÉèÖÃ³É1
+    Vector dataVector = defaultModel.getDataVector();// »ñµÃÔ­±í¸ñÄ£ĞÍÖĞµÄÊı¾İ
+    DefaultTableModel newModel = new DefaultTableModel();// ´´½¨ĞÂµÄ±í¸ñÄ£ĞÍ
+    // ¶¨Òå±íÍ·
     newModel.setColumnIdentifiers(new Object[]
-            { "æœŸæ•°", "ç¬¬1ä½", "ç¬¬2ä½", "ç¬¬3ä½", "ç¬¬4ä½", "ç¬¬5ä½", "ç¬¬6ä½", "ç¬¬7ä½", "å¼€å¥–æ—¶é—´" });
+            { "ÆÚÊı", "µÚ1Î»", "µÚ2Î»", "µÚ3Î»", "µÚ4Î»", "µÚ5Î»", "µÚ6Î»", "µÚ7Î»", "¿ª½±Ê±¼ä" });
     for (int i = 0; i < pageSize; i++) {
-        newModel.addRow((Vector) dataVector.elementAt(i));// æ ¹æ®é¡µé¢å¤§å°æ¥è·å¾—æ•°æ®
+        newModel.addRow((Vector) dataVector.elementAt(i));// ¸ù¾İÒ³Ãæ´óĞ¡À´»ñµÃÊı¾İ
     }
     table.getTableHeader().setReorderingAllowed(false);
-    table.setModel(newModel);// è®¾ç½®è¡¨æ ¼æ¨¡å‹
-    firstPageButton.setEnabled(false);// ç¦ç”¨â€œé¦–é¡µâ€æŒ‰é’®
-    latePageButton.setEnabled(false);// ç¦ç”¨â€œä¸Šä¸€é¡µâ€æŒ‰é’®
-    nextPageButton.setEnabled(true);// å¯ç”¨â€œä¸‹ä¸€é¡µâ€æŒ‰é’®
-    lastPageButton.setEnabled(true);// å¯ç”¨â€œå°¾é¡µâ€æŒ‰é’®
+    table.setModel(newModel);// ÉèÖÃ±í¸ñÄ£ĞÍ
+    firstPageButton.setEnabled(false);// ½ûÓÃ¡°Ê×Ò³¡±°´Å¥
+    latePageButton.setEnabled(false);// ½ûÓÃ¡°ÉÏÒ»Ò³¡±°´Å¥
+    nextPageButton.setEnabled(true);// ÆôÓÃ¡°ÏÂÒ»Ò³¡±°´Å¥
+    lastPageButton.setEnabled(true);// ÆôÓÃ¡°Î²Ò³¡±°´Å¥
 }
-// â€œå°¾é¡µâ€æŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
+// ¡°Î²Ò³¡±°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
 protected void do_lastPageButton_actionPerformed(ActionEvent e) {
-    currentPageNumber = maxPageNumber;// å°†å½“å‰é¡µé¢è®¾ç½®ä¸ºæœ«é¡µ
-    Vector dataVector = defaultModel.getDataVector();// è·å¾—åŸè¡¨æ ¼æ¨¡å‹ä¸­çš„æ•°æ®
-    DefaultTableModel newModel = new DefaultTableModel();// åˆ›å»ºæ–°çš„è¡¨æ ¼æ¨¡å‹
-    // å®šä¹‰è¡¨å¤´
+    currentPageNumber = maxPageNumber;// ½«µ±Ç°Ò³ÃæÉèÖÃÎªÄ©Ò³
+    Vector dataVector = defaultModel.getDataVector();// »ñµÃÔ­±í¸ñÄ£ĞÍÖĞµÄÊı¾İ
+    DefaultTableModel newModel = new DefaultTableModel();// ´´½¨ĞÂµÄ±í¸ñÄ£ĞÍ
+    // ¶¨Òå±íÍ·
     newModel.setColumnIdentifiers(new Object[]
-            { "æœŸæ•°", "ç¬¬1ä½", "ç¬¬2ä½", "ç¬¬3ä½", "ç¬¬4ä½", "ç¬¬5ä½", "ç¬¬6ä½", "ç¬¬7ä½", "å¼€å¥–æ—¶é—´" });
+            { "ÆÚÊı", "µÚ1Î»", "µÚ2Î»", "µÚ3Î»", "µÚ4Î»", "µÚ5Î»", "µÚ6Î»", "µÚ7Î»", "¿ª½±Ê±¼ä" });
     int lastPageSize = (int)
             (defaultModel.getRowCount() - pageSize * (maxPageNumber - 1));
     if (lastPageSize == maxrows) {
         for (int i = 0; i < pageSize; i++) {
-            // æ ¹æ®é¡µé¢å¤§å°æ¥è·å¾—æ•°æ®
+            // ¸ù¾İÒ³Ãæ´óĞ¡À´»ñµÃÊı¾İ
             newModel.addRow(
                     (Vector) dataVector.elementAt((int) (pageSize * (maxPageNumber - 1) + i))
             );
         }
     } else {
         for (int i = 0; i < lastPageSize; i++) {
-            // æ ¹æ®é¡µé¢å¤§å°æ¥è·å¾—æ•°æ®
+            // ¸ù¾İÒ³Ãæ´óĞ¡À´»ñµÃÊı¾İ
             newModel.addRow(
                     (Vector) dataVector.elementAt((int) (pageSize * (maxPageNumber - 1) + i))
             );
         }
     }
     table.getTableHeader().setReorderingAllowed(false);
-    table.setModel(newModel);// è®¾ç½®è¡¨æ ¼æ¨¡å‹
-    firstPageButton.setEnabled(true);// å¯ç”¨â€œé¦–é¡µâ€æŒ‰é’®
-    latePageButton.setEnabled(true);// å¯ç”¨â€œä¸Šä¸€é¡µâ€æŒ‰é’®
-    nextPageButton.setEnabled(false);// ç¦ç”¨â€œä¸‹ä¸€é¡µâ€æŒ‰é’®
-    lastPageButton.setEnabled(false);// ç¦ç”¨â€œå°¾é¡µâ€æŒ‰é’®
+    table.setModel(newModel);// ÉèÖÃ±í¸ñÄ£ĞÍ
+    firstPageButton.setEnabled(true);// ÆôÓÃ¡°Ê×Ò³¡±°´Å¥
+    latePageButton.setEnabled(true);// ÆôÓÃ¡°ÉÏÒ»Ò³¡±°´Å¥
+    nextPageButton.setEnabled(false);// ½ûÓÃ¡°ÏÂÒ»Ò³¡±°´Å¥
+    lastPageButton.setEnabled(false);// ½ûÓÃ¡°Î²Ò³¡±°´Å¥
 }
 
-public void selecttable() {// åˆ†é¡µæ˜¾ç¤ºå¼€å¥–å·ç çš„æ–¹æ³•
-    defaultModel = (DefaultTableModel) table.getModel();// è·å¾—è¡¨æ ¼æ¨¡å‹
-    defaultModel.setRowCount(0);// æ¸…ç©ºè¡¨æ ¼æ¨¡å‹ä¸­çš„æ•°æ®
-    // å®šä¹‰è¡¨å¤´
+public void selecttable() {// ·ÖÒ³ÏÔÊ¾¿ª½±ºÅÂëµÄ·½·¨
+    defaultModel = (DefaultTableModel) table.getModel();// »ñµÃ±í¸ñÄ£ĞÍ
+    defaultModel.setRowCount(0);// Çå¿Õ±í¸ñÄ£ĞÍÖĞµÄÊı¾İ
+    // ¶¨Òå±íÍ·
     defaultModel.setColumnIdentifiers(new Object[]
-            { "æœŸæ•°", "ç¬¬1ä½", "ç¬¬2ä½", "ç¬¬3ä½", "ç¬¬4ä½", "ç¬¬5ä½", "ç¬¬6ä½", "ç¬¬7ä½", "å¼€å¥–æ—¶é—´" });
-    String sql = "select count(id) from tb_history";// å®šä¹‰SQLè¯­å¥
-    ConnMySQL con = new ConnMySQL();// è¿æ¥æ•°æ®åº“
-    ResultSet rs = con.showAll(sql);// æ‰§è¡ŒSQLè¯­å¥åè·å¾—çš„ç»“æœé›†
+            { "ÆÚÊı", "µÚ1Î»", "µÚ2Î»", "µÚ3Î»", "µÚ4Î»", "µÚ5Î»", "µÚ6Î»", "µÚ7Î»", "¿ª½±Ê±¼ä" });
+    String sql = "select count(id) from tb_history";// ¶¨ÒåSQLÓï¾ä
+    ConnMySQL con = new ConnMySQL();// Á¬½ÓÊı¾İ¿â
+    ResultSet rs = con.showAll(sql);// Ö´ĞĞSQLÓï¾äºó»ñµÃµÄ½á¹û¼¯
     try {
-        if (rs.next())// å› ä¸ºä¸Šé¢çš„æ‰§è¡Œç»“æœæ˜¯æœ‰ä¸”åªæœ‰ä¸€ä¸ªï¼Œæ‰€ä»¥æˆ‘ä»¬ç”¨ifè¯­å¥æ¥éå†é›†åˆ
+        if (rs.next())// ÒòÎªÉÏÃæµÄÖ´ĞĞ½á¹ûÊÇÓĞÇÒÖ»ÓĞÒ»¸ö£¬ËùÒÔÎÒÃÇÓÃifÓï¾äÀ´±éÀú¼¯ºÏ
         {
-            maxrows = rs.getInt(1);// ä¸ºæœ€å¤§è¡Œæ•°èµ‹å€¼
+            maxrows = rs.getInt(1);// Îª×î´óĞĞÊı¸³Öµ
         }
-        con.closeConnection();// å…³é—­é“¾æ¥
+        con.closeConnection();// ¹Ø±ÕÁ´½Ó
     } catch (SQLException eq) {
         eq.printStackTrace();
     }
-    if (maxrows != 0) {// åˆ¤æ–­å¦‚æœæœ‰æ•°æ®æ‰§è¡Œä¸‹é¢çš„æ–¹æ³•
-        // æŒ‰ç…§å¼€å¥–æœŸæ•°é™åºæ’åˆ—è·å¾—è¡¨tb_historyä¸­æ•°æ®çš„SQLè¯­å¥
+    if (maxrows != 0) {// ÅĞ¶ÏÈç¹ûÓĞÊı¾İÖ´ĞĞÏÂÃæµÄ·½·¨
+        // °´ÕÕ¿ª½±ÆÚÊı½µĞòÅÅÁĞ»ñµÃ±ítb_historyÖĞÊı¾İµÄSQLÓï¾ä
         sql = "select * from tb_history order by number desc";
-        rs = con.showAll(sql);// æ‰§è¡ŒSQLè¯­å¥åè·å¾—çš„ç»“æœé›†
+        rs = con.showAll(sql);// Ö´ĞĞSQLÓï¾äºó»ñµÃµÄ½á¹û¼¯
         try {
-            // ä¸ºè¡¨æ ¼ä¸­æ¯ä¸€è¡Œçš„å•å…ƒæ ¼èµ‹å€¼
+            // Îª±í¸ñÖĞÃ¿Ò»ĞĞµÄµ¥Ôª¸ñ¸³Öµ
             while (rs.next()) {
                 defaultModel.addRow(new Object[] { rs.getInt(2), rs.getInt(3),
                         rs.getInt(4), rs.getInt(5),rs.getInt(6), rs.getInt(7),
@@ -329,28 +344,28 @@ public void selecttable() {// åˆ†é¡µæ˜¾ç¤ºå¼€å¥–å·ç çš„æ–¹æ³•
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-        // è®¡ç®—æ€»é¡µæ•°
+        // ¼ÆËã×ÜÒ³Êı
         maxPageNumber = (int)
                 (maxrows % pageSize == 0 ? maxrows / pageSize : maxrows / pageSize + 1);
-        DefaultTableModel newModel = new DefaultTableModel();// åˆ›å»ºæ–°çš„è¡¨æ ¼æ¨¡å‹
-        // å®šä¹‰è¡¨å¤´
+        DefaultTableModel newModel = new DefaultTableModel();// ´´½¨ĞÂµÄ±í¸ñÄ£ĞÍ
+        // ¶¨Òå±íÍ·
         newModel.setColumnIdentifiers(new Object[]
-                { "æœŸæ•°", "ç¬¬1ä½", "ç¬¬2ä½", "ç¬¬3ä½", "ç¬¬4ä½", "ç¬¬5ä½", "ç¬¬6ä½", "ç¬¬7ä½", "å¼€å¥–æ—¶é—´" });
+                { "ÆÚÊı", "µÚ1Î»", "µÚ2Î»", "µÚ3Î»", "µÚ4Î»", "µÚ5Î»", "µÚ6Î»", "µÚ7Î»", "¿ª½±Ê±¼ä" });
         for (int i = 0; i < pageSize; i++) {
-            // æ ¹æ®é¡µé¢å¤§å°æ¥è·å¾—æ•°æ®
+            // ¸ù¾İÒ³Ãæ´óĞ¡À´»ñµÃÊı¾İ
             newModel.addRow((Vector) defaultModel.getDataVector().elementAt(i));
         }
         table.getTableHeader().setReorderingAllowed(false);
-        table.setModel(newModel);// è®¾ç½®è¡¨æ ¼æ¨¡å‹
-        firstPageButton.setEnabled(false);// ç¦ç”¨â€œé¦–é¡µâ€æŒ‰é’®
-        latePageButton.setEnabled(false);// ç¦ç”¨â€œä¸Šä¸€é¡µâ€æŒ‰é’®
-        nextPageButton.setEnabled(true);// å¯ç”¨â€œä¸‹ä¸€é¡µâ€æŒ‰é’®
-        lastPageButton.setEnabled(true);// å¯ç”¨â€œå°¾é¡µâ€æŒ‰é’®
+        table.setModel(newModel);// ÉèÖÃ±í¸ñÄ£ĞÍ
+        firstPageButton.setEnabled(false);// ½ûÓÃ¡°Ê×Ò³¡±°´Å¥
+        latePageButton.setEnabled(false);// ½ûÓÃ¡°ÉÏÒ»Ò³¡±°´Å¥
+        nextPageButton.setEnabled(true);// ÆôÓÃ¡°ÏÂÒ»Ò³¡±°´Å¥
+        lastPageButton.setEnabled(true);// ÆôÓÃ¡°Î²Ò³¡±°´Å¥
     } else {
-        firstPageButton.setEnabled(false);// ç¦ç”¨â€œé¦–é¡µâ€æŒ‰é’®
-        latePageButton.setEnabled(false);// ç¦ç”¨â€œä¸Šä¸€é¡µâ€æŒ‰é’®
-        nextPageButton.setEnabled(false);// ç¦ç”¨â€œä¸‹ä¸€é¡µâ€æŒ‰é’®
-        lastPageButton.setEnabled(false);// ç¦ç”¨â€œå°¾é¡µâ€æŒ‰é’®
+        firstPageButton.setEnabled(false);// ½ûÓÃ¡°Ê×Ò³¡±°´Å¥
+        latePageButton.setEnabled(false);// ½ûÓÃ¡°ÉÏÒ»Ò³¡±°´Å¥
+        nextPageButton.setEnabled(false);// ½ûÓÃ¡°ÏÂÒ»Ò³¡±°´Å¥
+        lastPageButton.setEnabled(false);// ½ûÓÃ¡°Î²Ò³¡±°´Å¥
     }
 }
 

@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginMain extends JFrame {
-private JPanel contentPane;// å†…å®¹é¢æ¿
+private JPanel contentPane;// ÄÚÈİÃæ°å
 
 public static void main(String[] args) {
     try {
-        // è®¾ç½®ç™»å½•çª—ä½“é£æ ¼
+        // ÉèÖÃµÇÂ¼´°Ìå·ç¸ñ
         UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
     } catch (Throwable e) {
         e.printStackTrace();
@@ -18,9 +18,9 @@ public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable() {
         public void run() {
             try {
-                // å®ä¾‹åŒ–ç™»å½•çª—ä½“
+                // ÊµÀı»¯µÇÂ¼´°Ìå
                 LoginMain frame = new LoginMain();
-                // ä½¿ç™»å½•çª—ä½“å¯è§
+                // Ê¹µÇÂ¼´°Ìå¿É¼û
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -29,31 +29,31 @@ public static void main(String[] args) {
     });
 }
 
-public LoginMain() {// ç™»å½•çª—ä½“çš„æ„é€ æ–¹æ³•
-    setTitle("æ˜æ—¥å½©ç¥¨é¢„æµ‹ç³»ç»Ÿ");// ç™»å½•çª—ä½“çš„æ ‡é¢˜
-    // ç™»å½•çª—ä½“çš„æ ‡é¢˜å›¾æ ‡
+public LoginMain() {// µÇÂ¼´°ÌåµÄ¹¹Ôì·½·¨
+    setTitle("Ã÷ÈÕ²ÊÆ±Ô¤²âÏµÍ³");// µÇÂ¼´°ÌåµÄ±êÌâ
+    // µÇÂ¼´°ÌåµÄ±êÌâÍ¼±ê
     setIconImage(Toolkit.getDefaultToolkit().getImage(LoginMain.class.getResource("/imgs/log.png")));
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// å¯¹ç™»å½•çª—ä½“å‘èµ·â€œcloseâ€æ—¶ï¼Œé€€å‡ºåº”ç”¨ç¨‹åº
-    setBounds(200, 100, 1100, 620);// ç™»å½•çª—ä½“çš„ä½ç½®åŠå®½é«˜
-    contentPane = new JPanel();// å†…å®¹é¢æ¿
-    setContentPane(contentPane);// æŠŠå†…å®¹é¢æ¿æ”¾å…¥ç™»å½•çª—ä½“ä¸­
-    contentPane.setLayout(new BorderLayout(0, 0));// è®¾ç½®å†…å®¹é¢æ¿çš„å¸ƒå±€ä¸ºè¾¹ç•Œå¸ƒå±€
-    JButton btnNewButton = new JButton("");// å®ä¾‹åŒ–æ— æ–‡æœ¬å†…å®¹çš„æŒ‰é’®
-    // è®¾ç½®æŒ‰é’®çš„å›¾ç‰‡
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ¶ÔµÇÂ¼´°Ìå·¢Æğ¡°close¡±Ê±£¬ÍË³öÓ¦ÓÃ³ÌĞò
+    setBounds(200, 100, 1100, 620);// µÇÂ¼´°ÌåµÄÎ»ÖÃ¼°¿í¸ß
+    contentPane = new JPanel();// ÄÚÈİÃæ°å
+    setContentPane(contentPane);// °ÑÄÚÈİÃæ°å·ÅÈëµÇÂ¼´°ÌåÖĞ
+    contentPane.setLayout(new BorderLayout(0, 0));// ÉèÖÃÄÚÈİÃæ°åµÄ²¼¾ÖÎª±ß½ç²¼¾Ö
+    JButton btnNewButton = new JButton("");// ÊµÀı»¯ÎŞÎÄ±¾ÄÚÈİµÄ°´Å¥
+    // ÉèÖÃ°´Å¥µÄÍ¼Æ¬
     btnNewButton.setIcon(new ImageIcon(LoginMain.class.getResource("/imgs/login1.jpg")));
-    contentPane.add(btnNewButton, BorderLayout.CENTER);// æŒ‰é’®æ”¾ç½®åœ¨å†…å®¹é¢æ¿çš„ä¸­é—´
+    contentPane.add(btnNewButton, BorderLayout.CENTER);// °´Å¥·ÅÖÃÔÚÄÚÈİÃæ°åµÄÖĞ¼ä
 
-    btnNewButton.addActionListener(new ActionListener() {// ä¸ºæŒ‰é’®æ·»åŠ åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬
-        public void actionPerformed(ActionEvent e) {// åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬çš„æ–¹æ³•ä½“
-            do_btnNewButton_actionPerformed(e);// æŒ‰é’®è§¦å‘åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬æ—¶æ‰§è¡Œçš„æ–¹æ³•
+    btnNewButton.addActionListener(new ActionListener() {// Îª°´Å¥Ìí¼Ó¶¯×÷ÊÂ¼şµÄ¼àÌı
+        public void actionPerformed(ActionEvent e) {// ¶¯×÷ÊÂ¼şµÄ¼àÌıµÄ·½·¨Ìå
+            do_btnNewButton_actionPerformed(e);// °´Å¥´¥·¢¶¯×÷ÊÂ¼şµÄ¼àÌıÊ±Ö´ĞĞµÄ·½·¨
         }
     });
 }
-// æŒ‰é’®è§¦å‘åŠ¨ä½œäº‹ä»¶çš„ç›‘å¬æ—¶æ‰§è¡Œçš„æ–¹æ³•
+// °´Å¥´¥·¢¶¯×÷ÊÂ¼şµÄ¼àÌıÊ±Ö´ĞĞµÄ·½·¨
 protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-    this.setVisible(false);// ç™»å½•çª—ä½“ä¸å¯è§
-    MainFrame t = new MainFrame();// åˆ›å»ºä¸»çª—ä½“
-    t.setVisible(true);// ä½¿ä¸»çª—ä½“å¯è§
+    this.setVisible(false);// µÇÂ¼´°Ìå²»¿É¼û
+    MainFrame t = new MainFrame();// ´´½¨Ö÷´°Ìå
+    t.setVisible(true);// Ê¹Ö÷´°Ìå¿É¼û
 }
 
 
