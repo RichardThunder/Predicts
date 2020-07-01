@@ -4,18 +4,14 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-
 import  java.awt.event.ActionEvent;
 import  java.awt.event.ActionListener;
-
-import com.db.*;
+import com.db.ConnMySQL;
 import com.allchart.ALineChart;
 import com.frame.BackgroundPanel;
-
 import java.text.DecimalFormat;
 import org.jfree.ui.RefineryUtilities;
 

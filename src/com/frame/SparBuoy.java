@@ -1,4 +1,6 @@
-package com.company.Predict;
+package com.frame;
+
+//import com.allchart.ALineChart;
 import com.allpanel.Apanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JDialog;
@@ -6,6 +8,7 @@ import javax.swing.JFrame;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
 public class SparBuoy extends JDialog {
+
     JTabbedPane tp = new JTabbedPane();// 创建选项卡面板
     public SparBuoy() {// 号码走势对话框的构造方法
     setTitle("号码走势");// 设置号码走势对话框的标题
@@ -22,7 +25,7 @@ public class SparBuoy extends JDialog {
 public static void main(String[] args) {
     try {
         // 设置号码走势对话框的样式
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
     } catch (Throwable e) {
         e.printStackTrace();
     }

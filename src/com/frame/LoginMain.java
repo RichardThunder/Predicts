@@ -1,4 +1,4 @@
-package com.company.Predict;
+package com.frame;
 
 import javax.swing.*;
 import java.awt.*;
