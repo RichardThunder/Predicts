@@ -7,6 +7,9 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -160,8 +163,138 @@ public MainFrame() {// 主窗体的构造方法
     lastPageButton.setBounds(819, 439, 84, 27); // “尾页”按钮的位置及宽高
     contentPane.add(lastPageButton); // 将“尾页”按钮添加到自定义背景面板中
 
+    latePageButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            do_latePageButton_actionPerformed(e);// 为“上一页”按钮添加动作事件的监听
+        }
+    });
+    nextPageButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            do_nextPageButton_actionPerformed(e);// 为“下一页”按钮添加动作事件的监听
+        }
+    });
+
+
     selecttable();//分页显示开奖号码的方法
 
+    firstPageButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            do_firstPageButton_actionPerformed(e);// 为“首页”按钮添加动作事件的监听
+        }
+    });
+    lastPageButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            do_lastPageButton_actionPerformed(e);// 为“尾页”按钮添加动作事件的监听
+        }
+    });
+
+}
+
+// “上一页”按钮添加动作事件的监听
+protected void do_latePageButton_actionPerformed(ActionEvent e) {
+    currentPageNumber--;// 将当前页面减一
+    Vector dataVector = defaultModel.getDataVector();// 获得原表格模型中的数据
+    DefaultTableModel newModel = new DefaultTableModel();// 创建新的表格模型
+    // 定义表头
+    newModel.setColumnIdentifiers(new Object[]
+            { "期数", "第1位", "第2位", "第3位", "第4位", "第5位", "第6位", "第7位", "开奖时间" });
+    for (int i = 0; i < pageSize; i++) {
+        // 根据页面大小来获得数据
+        newModel.addRow(
+                (Vector) dataVector.elementAt((int) (pageSize * (currentPageNumber - 1) + i))
+        );
+    }
+    table.getTableHeader().setReorderingAllowed(false);
+    table.setModel(newModel);// 设置表格模型
+    if (currentPageNumber == 1) {
+        firstPageButton.setEnabled(false);// 禁用“首页”按钮
+        latePageButton.setEnabled(false);// 禁用“上一页”按钮
+    }
+    nextPageButton.setEnabled(true);// 启用“下一页”按钮
+    lastPageButton.setEnabled(true);// 启用“尾页”按钮
+}
+// “下一页”按钮添加动作事件的监听
+protected void do_nextPageButton_actionPerformed(ActionEvent e) {
+    currentPageNumber++;// 将当前页面加一
+    Vector dataVector = defaultModel.getDataVector();// 获得原表格模型中的数据
+    DefaultTableModel newModel = new DefaultTableModel();// 创建新的表格模型
+    // 定义表头
+    newModel.setColumnIdentifiers(new Object[]
+            { "期数", "第1位", "第2位", "第3位", "第4位", "第5位", "第6位", "第7位", "开奖时间" });
+    if (currentPageNumber == maxPageNumber) {
+        int lastPageSize = (int)
+                (defaultModel.getRowCount() - pageSize * (maxPageNumber - 1));
+        for (int i = 0; i < lastPageSize; i++) {
+            // 根据页面大小来获得数据
+            newModel.addRow(
+                    (Vector) dataVector.elementAt((int) (pageSize * (maxPageNumber - 1) + i))
+            );
+        }
+        nextPageButton.setEnabled(false);// 禁用“下一页”按钮
+        lastPageButton.setEnabled(false);// 禁用“尾页”按钮
+    } else {
+        for (int i = 0; i < pageSize; i++) {
+            // 根据页面大小来获得数据
+            newModel.addRow(
+                    (Vector) dataVector.elementAt((int) (pageSize * (currentPageNumber - 1) + i))
+            );
+        }
+    }
+    table.getTableHeader().setReorderingAllowed(false);
+    table.setModel(newModel);// 设置表格模型
+    firstPageButton.setEnabled(true);// 启用“首页”按钮
+    latePageButton.setEnabled(true);// 启用“上一页”按钮
+}
+
+// “首页”按钮添加动作事件的监听
+protected void do_firstPageButton_actionPerformed(ActionEvent e) {
+    currentPageNumber = 1;// 将当前页码设置成1
+    Vector dataVector = defaultModel.getDataVector();// 获得原表格模型中的数据
+    DefaultTableModel newModel = new DefaultTableModel();// 创建新的表格模型
+    // 定义表头
+    newModel.setColumnIdentifiers(new Object[]
+            { "期数", "第1位", "第2位", "第3位", "第4位", "第5位", "第6位", "第7位", "开奖时间" });
+    for (int i = 0; i < pageSize; i++) {
+        newModel.addRow((Vector) dataVector.elementAt(i));// 根据页面大小来获得数据
+    }
+    table.getTableHeader().setReorderingAllowed(false);
+    table.setModel(newModel);// 设置表格模型
+    firstPageButton.setEnabled(false);// 禁用“首页”按钮
+    latePageButton.setEnabled(false);// 禁用“上一页”按钮
+    nextPageButton.setEnabled(true);// 启用“下一页”按钮
+    lastPageButton.setEnabled(true);// 启用“尾页”按钮
+}
+// “尾页”按钮添加动作事件的监听
+protected void do_lastPageButton_actionPerformed(ActionEvent e) {
+    currentPageNumber = maxPageNumber;// 将当前页面设置为末页
+    Vector dataVector = defaultModel.getDataVector();// 获得原表格模型中的数据
+    DefaultTableModel newModel = new DefaultTableModel();// 创建新的表格模型
+    // 定义表头
+    newModel.setColumnIdentifiers(new Object[]
+            { "期数", "第1位", "第2位", "第3位", "第4位", "第5位", "第6位", "第7位", "开奖时间" });
+    int lastPageSize = (int)
+            (defaultModel.getRowCount() - pageSize * (maxPageNumber - 1));
+    if (lastPageSize == maxrows) {
+        for (int i = 0; i < pageSize; i++) {
+            // 根据页面大小来获得数据
+            newModel.addRow(
+                    (Vector) dataVector.elementAt((int) (pageSize * (maxPageNumber - 1) + i))
+            );
+        }
+    } else {
+        for (int i = 0; i < lastPageSize; i++) {
+            // 根据页面大小来获得数据
+            newModel.addRow(
+                    (Vector) dataVector.elementAt((int) (pageSize * (maxPageNumber - 1) + i))
+            );
+        }
+    }
+    table.getTableHeader().setReorderingAllowed(false);
+    table.setModel(newModel);// 设置表格模型
+    firstPageButton.setEnabled(true);// 启用“首页”按钮
+    latePageButton.setEnabled(true);// 启用“上一页”按钮
+    nextPageButton.setEnabled(false);// 禁用“下一页”按钮
+    lastPageButton.setEnabled(false);// 禁用“尾页”按钮
 }
 
 public void selecttable() {// 分页显示开奖号码的方法
