@@ -9,7 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="BackgroundImage" level="project" />
     <orderEntry type="library" name="forms-1.3.0" level="project" />
-    <orderEntry type="library" name="jcommon-1.0.16" level="project" />
+    <orderEntry type="library" exported="" name="jcommon-1.0.16" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.20" level="project" />
   </component>
 </module>
