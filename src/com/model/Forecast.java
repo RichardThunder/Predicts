@@ -1,17 +1,17 @@
 package com.model;
 
 public class Forecast {
-private int id;// idï¼ˆæ•°æ®åº“ä¸­çš„idï¼‰
-private int number;// å¼€å¥–æœŸæ•°
-private int a;// ç¬¬1ä½
-private int b;// ç¬¬2ä½
-private int c;// ç¬¬3ä½
-private int d;// ç¬¬4ä½
-private int e;// ç¬¬5ä½
-private int f;// ç¬¬6ä½
-private int g;// ç¬¬7ä½
-private String forecasttime;// é¢„æµ‹æ—¶é—´
-private Long neutron;// å¥–é‡‘
+private int id;// id£¨Êı¾İ¿âÖĞµÄid£©
+private int number;// ¿ª½±ÆÚÊı
+private int a;// µÚ1Î»
+private int b;// µÚ2Î»
+private int c;// µÚ3Î»
+private int d;// µÚ4Î»
+private int e;// µÚ5Î»
+private int f;// µÚ6Î»
+private int g;// µÚ7Î»
+private String forecasttime;// Ô¤²âÊ±¼ä
+private Long neutron;// ½±½ğ
 
 public int getId() {
     return id;

@@ -9,67 +9,67 @@ import com.model.History;
 
 public class ConnMySQL {
 
-private final String dbDriver = "com.mysql.jdbc.Driver";// è¿æ¥MySQLæ•°æ®åº“çš„é©±åŠ¨
-// è¿æ¥MySQLæ•°æ®åº“çš„è·¯å¾„
+private final String dbDriver = "com.mysql.jdbc.Driver";// Á¬½ÓMySQLÊı¾İ¿âµÄÇı¶¯
+// Á¬½ÓMySQLÊı¾İ¿âµÄÂ·¾¶
 private static final String URL = "jdbc:mysql://localhost:3306/db_lottery?serverTimezone=GMT%2B8";
-private static final String USERNAME = "root";// è¿æ¥MySQLæ•°æ®åº“çš„ç”¨æˆ·å
-private static final String PASSWORD = "root";// è¿æ¥MySQLæ•°æ®åº“çš„å¯†ç 
-private static Connection con = null;// åˆå§‹åŒ–è¿æ¥MySQLæ•°æ®åº“çš„å¯¹è±¡
-public ConnMySQL() {// è¿æ¥MySQLæ•°æ®åº“çš„æ„é€ æ–¹æ³•
+private static final String USERNAME = "root";// Á¬½ÓMySQLÊı¾İ¿âµÄÓÃ»§Ãû
+private static final String PASSWORD = "root";// Á¬½ÓMySQLÊı¾İ¿âµÄÃÜÂë
+private static Connection con = null;// ³õÊ¼»¯Á¬½ÓMySQLÊı¾İ¿âµÄ¶ÔÏó
+public ConnMySQL() {// Á¬½ÓMySQLÊı¾İ¿âµÄ¹¹Ôì·½·¨
     try {
-        Class.forName(dbDriver);// åŠ è½½MySQLæ•°æ®åº“çš„é©±åŠ¨
+        Class.forName(dbDriver);// ¼ÓÔØMySQLÊı¾İ¿âµÄÇı¶¯
     } catch (ClassNotFoundException e) {
         e.printStackTrace();
-        System.out.println("æ•°æ®åº“åŠ è½½å¤±è´¥");
+        System.out.println("Êı¾İ¿â¼ÓÔØÊ§°Ü");
     }
 }
-public static boolean creatConnection() {// å»ºç«‹MySQLæ•°æ®åº“çš„è¿æ¥
+public static boolean creatConnection() {// ½¨Á¢MySQLÊı¾İ¿âµÄÁ¬½Ó
     try {
-        // æ ¹æ®è¿æ¥MySQLæ•°æ®åº“çš„è·¯å¾„ã€ç”¨æˆ·åã€å¯†ç è¿æ¥MySQLæ•°æ®åº“
+        // ¸ù¾İÁ¬½ÓMySQLÊı¾İ¿âµÄÂ·¾¶¡¢ÓÃ»§Ãû¡¢ÃÜÂëÁ¬½ÓMySQLÊı¾İ¿â
         con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
     } catch (SQLException e) {
         e.printStackTrace();
     }
     return true;
 }
-public void closeConnection() {// å…³é—­MySQLæ•°æ®åº“çš„è¿æ¥
-    if (con != null) {// åˆ¤æ–­Connectionå¯¹è±¡æ˜¯å¦ä¸ºç©º
+public void closeConnection() {// ¹Ø±ÕMySQLÊı¾İ¿âµÄÁ¬½Ó
+    if (con != null) {// ÅĞ¶ÏConnection¶ÔÏóÊÇ·ñÎª¿Õ
         try {
-            con.close();// å…³é—­MySQLæ•°æ®åº“è¿æ¥
+            con.close();// ¹Ø±ÕMySQLÊı¾İ¿âÁ¬½Ó
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            con = null;// é‡ç½®Connectionå¯¹è±¡ä¸ºç©º
+            con = null;// ÖØÖÃConnection¶ÔÏóÎª¿Õ
         }
     }
 }
-public ResultSet showAll(String sql) {// æ˜¾ç¤ºæ‰€æœ‰å¼€å¥–ä¿¡æ¯
-    Statement statement = null;// å£°æ˜ç”¨äºæ‰§è¡ŒSQLè¯­å¥çš„æ¥å£
-    if (con == null) {// Connectionå¯¹è±¡ä¸ºç©º
-        creatConnection();// å»ºç«‹MySQLæ•°æ®åº“çš„è¿æ¥
+public ResultSet showAll(String sql) {// ÏÔÊ¾ËùÓĞ¿ª½±ĞÅÏ¢
+    Statement statement = null;// ÉùÃ÷ÓÃÓÚÖ´ĞĞSQLÓï¾äµÄ½Ó¿Ú
+    if (con == null) {// Connection¶ÔÏóÎª¿Õ
+        creatConnection();// ½¨Á¢MySQLÊı¾İ¿âµÄÁ¬½Ó
     }
     try {
-        statement = con.createStatement();// åˆ›å»ºæ‰§è¡ŒSQLè¯­å¥çš„Statementå¯¹è±¡
-        ResultSet rs = statement.executeQuery(sql);// æ‰§è¡ŒæŸ¥è¯¢è¯­å¥è·å¾—ç»“æœé›†
+        statement = con.createStatement();// ´´½¨Ö´ĞĞSQLÓï¾äµÄStatement¶ÔÏó
+        ResultSet rs = statement.executeQuery(sql);// Ö´ĞĞ²éÑ¯Óï¾ä»ñµÃ½á¹û¼¯
         return rs;
     } catch (SQLException e) {
         e.printStackTrace();
     }
     return null;
 }
-public int getABC(String abc, int number) {// è·å¾—è¿›åº¦æ¡ã€ç»Ÿè®¡æ ‡ç­¾ä¸­çš„æ•°æ®
-    // è·å¾—number(0~9)åœ¨å†å±Šå¼€å¥–å·ç ä¸­ç¬¬abc(a~g)ä½å‡ºç°çš„æ€»æ¬¡æ•°
+public int getABC(String abc, int number) {// »ñµÃ½ø¶ÈÌõ¡¢Í³¼Æ±êÇ©ÖĞµÄÊı¾İ
+    // »ñµÃnumber(0~9)ÔÚÀú½ì¿ª½±ºÅÂëÖĞµÚabc(a~g)Î»³öÏÖµÄ×Ü´ÎÊı
     String sql = "select count(" + abc + ") from tb_history where " + abc + "=" + number;
-    Statement statement = null;// å£°æ˜ç”¨äºæ‰§è¡ŒSQLè¯­å¥çš„æ¥å£
-    int i = 0;// åˆå§‹åŒ–â€œå¼€å¥–æœŸæ•°â€
-    if (con == null) {// Connectionå¯¹è±¡ä¸ºç©º
-        creatConnection();// å»ºç«‹MySQLæ•°æ®åº“çš„è¿æ¥
+    Statement statement = null;// ÉùÃ÷ÓÃÓÚÖ´ĞĞSQLÓï¾äµÄ½Ó¿Ú
+    int i = 0;// ³õÊ¼»¯¡°¿ª½±ÆÚÊı¡±
+    if (con == null) {// Connection¶ÔÏóÎª¿Õ
+        creatConnection();// ½¨Á¢MySQLÊı¾İ¿âµÄÁ¬½Ó
     }
     try {
-        statement = con.createStatement();// åˆ›å»ºæ‰§è¡ŒSQLè¯­å¥çš„Statementå¯¹è±¡
-        ResultSet rs = statement.executeQuery(sql);// æ‰§è¡ŒæŸ¥è¯¢è¯­å¥è·å¾—ç»“æœé›†
-        while (rs.next()) {// éå†ç»“æœé›†
-            i = rs.getInt(1);// è·å¾—â€œå¼€å¥–æœŸæ•°â€
+        statement = con.createStatement();// ´´½¨Ö´ĞĞSQLÓï¾äµÄStatement¶ÔÏó
+        ResultSet rs = statement.executeQuery(sql);// Ö´ĞĞ²éÑ¯Óï¾ä»ñµÃ½á¹û¼¯
+        while (rs.next()) {// ±éÀú½á¹û¼¯
+            i = rs.getInt(1);// »ñµÃ¡°¿ª½±ÆÚÊı¡±
         }
     } catch (SQLException e) {
         e.printStackTrace();
@@ -78,46 +78,96 @@ public int getABC(String abc, int number) {// è·å¾—è¿›åº¦æ¡ã€ç»Ÿè®¡æ ‡ç­¾ä¸­ç
     }
     return i;
 }
-public static void closeStatement(Statement stat) {// å…³é—­ç”¨äºæ‰§è¡ŒSQLè¯­å¥çš„Statementå¯¹è±¡
+public static void closeStatement(Statement stat) {// ¹Ø±ÕÓÃÓÚÖ´ĞĞSQLÓï¾äµÄStatement¶ÔÏó
     if (stat != null) {
         try {
             stat.close();
         } catch (SQLException e) {
-            System.err.println("å…³é—­æ•°æ®åº“è¯­å¥å¼‚å¸¸");
+            System.err.println("¹Ø±ÕÊı¾İ¿âÓï¾äÒì³£");
             e.printStackTrace();
         }
     }
 }
 
-public static List<History> getFirstTenData() {// è·å¾—æœ€è¿‘10æœŸçš„å¼€å¥–ç»“æœ
-    // è·å¾—æœ€è¿‘10æœŸå¼€å¥–å·ç çš„SQLè¯­å¥
+public static List<History> getFirstTenData() {// »ñµÃ×î½ü10ÆÚµÄ¿ª½±½á¹û
+    // »ñµÃ×î½ü10ÆÚ¿ª½±ºÅÂëµÄSQLÓï¾ä
     String sql = "SELECT * FROM tb_history ORDER BY number DESC LIMIT 10";
-    List<History> list = new ArrayList<>();// å­˜å‚¨æœ€è¿‘10æœŸå¼€å¥–ç»“æœçš„é›†åˆ
-    Statement statement = null;// å£°æ˜ç”¨äºæ‰§è¡ŒSQLè¯­å¥çš„æ¥å£
-    if (con == null) {// Connectionå¯¹è±¡ä¸ºç©º
-        creatConnection();// å»ºç«‹MySQLæ•°æ®åº“çš„è¿æ¥
+    List<History> list = new ArrayList<>();// ´æ´¢×î½ü10ÆÚ¿ª½±½á¹ûµÄ¼¯ºÏ
+    Statement statement = null;// ÉùÃ÷ÓÃÓÚÖ´ĞĞSQLÓï¾äµÄ½Ó¿Ú
+    if (con == null) {// Connection¶ÔÏóÎª¿Õ
+        creatConnection();// ½¨Á¢MySQLÊı¾İ¿âµÄÁ¬½Ó
     }
     try {
-        statement = con.createStatement();// åˆ›å»ºæ‰§è¡ŒSQLè¯­å¥çš„Statementå¯¹è±¡
-        ResultSet rs = statement.executeQuery(sql);// æ‰§è¡ŒæŸ¥è¯¢è¯­å¥è·å¾—ç»“æœé›†
-        while (rs.next()) {// éå†ç»“æœé›†
-            History history = new History();// åˆ›å»ºå†å±Šå¼€å¥–ç»“æœå¯¹è±¡
-            history.setNumber(rs.getInt(2));// è·å¾—å¼€å¥–æœŸæ•°
-            history.setA(rs.getInt(3));// è·å¾—ç¬¬ä¸€ä½å¼€å¥–å·ç 
-            history.setB(rs.getInt(4));// è·å¾—ç¬¬äºŒä½å¼€å¥–å·ç 
-            history.setC(rs.getInt(5));// è·å¾—ç¬¬ä¸‰ä½å¼€å¥–å·ç 
-            history.setD(rs.getInt(6));// è·å¾—ç¬¬å››ä½å¼€å¥–å·ç 
-            history.setE(rs.getInt(7));// è·å¾—ç¬¬äº”ä½å¼€å¥–å·ç 
-            history.setF(rs.getInt(8));// è·å¾—ç¬¬å…­ä½å¼€å¥–å·ç 
-            history.setG(rs.getInt(9));// è·å¾—ç¬¬ä¸ƒä½å¼€å¥–å·ç 
-            list.add(history);// å‘é›†åˆä¸­æ·»åŠ å¼€å¥–ç»“æœå¯¹è±¡
+        statement = con.createStatement();// ´´½¨Ö´ĞĞSQLÓï¾äµÄStatement¶ÔÏó
+        ResultSet rs = statement.executeQuery(sql);// Ö´ĞĞ²éÑ¯Óï¾ä»ñµÃ½á¹û¼¯
+        while (rs.next()) {// ±éÀú½á¹û¼¯
+            History history = new History();// ´´½¨Àú½ì¿ª½±½á¹û¶ÔÏó
+            history.setNumber(rs.getInt(2));// »ñµÃ¿ª½±ÆÚÊı
+            history.setA(rs.getInt(3));// »ñµÃµÚÒ»Î»¿ª½±ºÅÂë
+            history.setB(rs.getInt(4));// »ñµÃµÚ¶şÎ»¿ª½±ºÅÂë
+            history.setC(rs.getInt(5));// »ñµÃµÚÈıÎ»¿ª½±ºÅÂë
+            history.setD(rs.getInt(6));// »ñµÃµÚËÄÎ»¿ª½±ºÅÂë
+            history.setE(rs.getInt(7));// »ñµÃµÚÎåÎ»¿ª½±ºÅÂë
+            history.setF(rs.getInt(8));// »ñµÃµÚÁùÎ»¿ª½±ºÅÂë
+            history.setG(rs.getInt(9));// »ñµÃµÚÆßÎ»¿ª½±ºÅÂë
+            list.add(history);// Ïò¼¯ºÏÖĞÌí¼Ó¿ª½±½á¹û¶ÔÏó
         }
     } catch (SQLException e) {
         e.printStackTrace();
     } finally {
         closeStatement(statement);
     }
-    return list;// è¿”å›å­˜å‚¨æœ€è¿‘10æœŸå¼€å¥–ç»“æœçš„é›†åˆ
+    return list;// ·µ»Ø´æ´¢×î½ü10ÆÚ¿ª½±½á¹ûµÄ¼¯ºÏ
 }
+
+public int selectNumber(String sql) {// ²éÑ¯ÆÚÊı
+    Statement statement = null;// ÉùÃ÷ÓÃÓÚÖ´ĞĞSQLÓï¾äµÄ½Ó¿Ú
+    int i = 10001;// ³õÊ¼»¯¡°¿ª½±ÆÚÊı¡±
+    if (con == null) {// Connection¶ÔÏóÎª¿Õ
+        creatConnection();// ½¨Á¢MySQLÊı¾İ¿âµÄÁ¬½Ó
+    }
+    try {
+        statement = con.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            i = rs.getInt(1);// Ìæ»»¡°¿ª½±ÆÚÊı¡±
+        }
+    } catch (SQLException e) {
+        System.out.println("ÀúÊ·¿ª½±ºÅÂëÌí¼ÓÊ§°Ü£¡");
+        e.printStackTrace();
+    } finally {
+        closeStatement(statement);
+    }
+    return i;
+}
+
+public Boolean addForecast(Forecast fr) {// Ìí¼Ó»úÑ¡ºÅÂë
+    if (con == null) {// Connection¶ÔÏóÎª¿Õ
+        creatConnection();// ½¨Á¢MySQLÊı¾İ¿âµÄÁ¬½Ó
+    }
+    try {
+        PreparedStatement statement = con.prepareStatement(
+                "insert into tb_forecast (number,a,b,c,d,e,f,g,forecasttime) "
+                        + "values(?,?,?,?,?,?,?,?,?)"
+        ); // ¶¨Òå²åÈëÊı¾İ¿âµÄÔ¤´¦ÀíÓï¾ä£¨À¨ºÅÀïÓĞ9¸ö¡°?¡±£©
+        statement.setInt(1, fr.getNumber()); // ÉèÖÃÔ¤´¦ÀíÓï¾äµÄ²ÎÊıÖµ
+        statement.setInt(2, fr.getA());
+        statement.setInt(3, fr.getB());
+        statement.setInt(4, fr.getC());
+        statement.setInt(5, fr.getD());
+        statement.setInt(6, fr.getE());
+        statement.setInt(7, fr.getF());
+        statement.setInt(8, fr.getG());
+        statement.setString(9, fr.getForecasttime());
+        statement.executeUpdate(); // Ö´ĞĞÔ¤´¦ÀíÓï¾ä
+        return true;
+    } catch (SQLException e) {
+        System.out.println("»úÑ¡ºÅÂëÌí¼ÓÊ§°Ü£¡");
+        e.printStackTrace();
+        return false;
+    }
+}
+
+
 
 }
