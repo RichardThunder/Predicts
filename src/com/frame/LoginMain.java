@@ -1,5 +1,16 @@
 package com.frame;
 
+import java.awt.Container;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +18,24 @@ import java.awt.event.ActionListener;
 
 public class LoginMain extends JFrame {
 private JPanel contentPane;// 内容面板
+private JFrame LoginFrame = new JFrame("登陆窗口");
+private JButton UserName = new JButton("用户名");
+private JButton PassWord = new JButton("密码");
+private JButton jbLogin = new JButton("登陆");
+private JButton jbCancel = new JButton("取消");
+private JTextField jtName = new JTextField();
+private JTextField jtPwd = new JTextField();
+private final String mima = "admin1234";//此为预设的密码
+private int count = 0;
+
+private JFrame LoginFrameZhu = new JFrame();
+
+//private JLabel jlZhu = new JLabel(image);
+
+private JFrame LoginFrameCuo = new JFrame();
+
+private JLabel jlCuo = new JLabel("你输入的用户名密码不匹配！");
+
 
 public static void main(String[] args) {
     try {
@@ -21,7 +50,7 @@ public static void main(String[] args) {
                 // 实例化登录窗体
                 LoginMain frame = new LoginMain();
                 // 使登录窗体可见
-                frame.setVisible(true);
+                frame.setVisible(false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -29,6 +58,78 @@ public static void main(String[] args) {
     });
 }
 
+public LoginMain(){
+    Container cp = LoginFrame.getContentPane();
+    cp.setLayout(null);
+    setIconImage(Toolkit.getDefaultToolkit().getImage(LoginMain.class.getResource("/imgs/log.png")));
+    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) screensize.getWidth() / 3;
+    int y = (int) screensize.getHeight() / 3;
+    LoginFrame.setLocation(x, y);
+    LoginFrame.setLocation(x, y);
+
+    jtName.setBounds(150,50,100,20);
+    cp.add(jtName);
+    UserName.setBounds(10,50,100,20);
+    cp.add(UserName);
+
+    jtPwd.setBounds(150,100,100,20);
+    cp.add(jtPwd);
+    PassWord.setBounds(10,100,100,20);
+    cp.add(PassWord);
+
+    jbLogin.setBounds(20, 150, 100, 20);
+    jbCancel.setBounds(150, 150, 100, 20);
+    cp.add(jbLogin);
+    cp.add(jbCancel);
+
+    jbCancel.addActionListener(new ActionListener() {
+
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
+    });
+
+    jbLogin.addActionListener(new ActionListener(){
+
+        public void actionPerformed(ActionEvent e){
+            String name = jtName.getText();
+            String pwd = jtPwd.getText();
+            String aa = name+pwd;
+            if(aa.equals(mima)){			//Java中判断两个字符串相等用equals()函数。
+                LoginFrame.setVisible(false);// 登录窗体不可见
+                MainFrame t = new MainFrame();// 创建主窗体
+                t.setVisible(true);// 使主窗体可见
+
+            }
+            else{
+                if(0<=count&&count<3){
+                    Container cp3 = LoginFrameCuo.getContentPane();
+                    cp3.setLayout(null);
+
+                    jlCuo.setBounds(0, 0, 400, 300);
+                    cp3.add(jlCuo);
+                    LoginFrameCuo.setSize(400,300);
+                    LoginFrameCuo.setVisible(true);
+                    count++;
+                }
+                else{
+                    if(count>=3)
+                        System.exit(0);
+                }
+            }
+        }
+    });
+
+    LoginFrame.setSize(400, 300);
+    LoginFrame.setVisible(true);
+
+
+}
+
+
+
+/*
 public LoginMain() {// 登录窗体的构造方法
     setTitle("明日彩票预测系统");// 登录窗体的标题
     // 登录窗体的标题图标
@@ -55,6 +156,6 @@ protected void do_btnNewButton_actionPerformed(ActionEvent e) {
     MainFrame t = new MainFrame();// 创建主窗体
     t.setVisible(true);// 使主窗体可见
 }
-
+*/
 
 }
