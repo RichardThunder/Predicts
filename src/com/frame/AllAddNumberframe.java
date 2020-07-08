@@ -85,7 +85,7 @@ public AllAddNumberframe() {// 批量添加对话框的构造方法
             do_btnNewButton_actionPerformed(e);// 为关闭按钮添加动作事件的监听
         }
     });
-    btnNewButton.setBounds(312, 412, 108, 79);// 设置关闭按钮的位置以及宽高
+    btnNewButton.setBounds(312, 412, 108, 39);// 设置关闭按钮的位置以及宽高
     contentPane.add(btnNewButton);// 把关闭按钮置于自定义背景面板中
 
     JButton button_1 = new JButton("");// 添加按钮
@@ -95,7 +95,7 @@ public AllAddNumberframe() {// 批量添加对话框的构造方法
             do_button_1_actionPerformed(e);// 为添加按钮添加动作事件的监听
         }
     });
-    button_1.setBounds(172, 412, 108, 75);// 设置添加按钮的位置以及宽高
+    button_1.setBounds(172, 412, 108, 38);// 设置添加按钮的位置以及宽高
     contentPane.add(button_1);// 把添加按钮置于自定义背景面板中
 
     erroyLabel = new JLabel("");// “添加数据状态”标签

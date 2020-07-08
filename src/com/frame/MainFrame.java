@@ -3,11 +3,14 @@ package com.frame;
 import com.db.ConnMySQL;
 import com.model.UpDateNumber;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -218,6 +221,7 @@ public MainFrame() {// 主窗体的构造方法
 
     selecttable();//分页显示开奖号码的方法
 
+    playBGM();
 
 }
 
@@ -438,6 +442,20 @@ protected void do_updatebutton_actionPerformed(ActionEvent e) {// “修改开奖号码
     HistoryUpdateframe historyUpdateframe = new HistoryUpdateframe();// 修改开奖号码对话框
     historyUpdateframe.setVisible(true);// 使修改开奖号码对话框可见
     selecttable();// 重新加载表格中的数据
+}
+
+
+void playBGM(){
+    try{
+        Clip bgm= AudioSystem.getClip();
+        InputStream is=this.getClass().getClassLoader().getResourceAsStream("resources/goodDay.wav");
+        AudioInputStream bgmA=AudioSystem.getAudioInputStream(is);
+        bgm.open(bgmA);
+        bgm.loop(Clip.LOOP_CONTINUOUSLY);//不停的播放
+    }
+    catch (LineUnavailableException | UnsupportedAudioFileException | IOException e){
+        e.printStackTrace();
+    }
 }
 
 

@@ -106,7 +106,7 @@ public HistoryUpdateframe() {// 修改开奖号码对话框的构造方法
             do_button_actionPerformed(e);// 为“关闭”按钮添加动作事件的监听
         }
     });
-    button.setBounds(288, 291, 108, 79);// 设置“关闭”按钮的位置以及宽高
+    button.setBounds(288, 291, 108, 39);// 设置“关闭”按钮的位置以及宽高
     contentPane.add(button);// 把“关闭”按钮置于自定义背景面板中
 
     JLabel label_1 = new JLabel("开奖日期：");// “开奖日期：”标签
