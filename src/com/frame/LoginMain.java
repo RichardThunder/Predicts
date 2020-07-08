@@ -59,39 +59,14 @@ public static void main(String[] args) {
 }
 
 public LoginMain(){
-    Container cp = LoginFrame.getContentPane();
-    cp.setLayout(null);
-    setIconImage(Toolkit.getDefaultToolkit().getImage(LoginMain.class.getResource("/imgs/log.png")));
-    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (int) screensize.getWidth() / 3;
-    int y = (int) screensize.getHeight() / 3;
-    LoginFrame.setLocation(x, y);
-    LoginFrame.setLocation(x, y);
-
-    jtName.setBounds(150,50,100,20);
-    cp.add(jtName);
-    UserName.setBounds(10,50,100,20);
-    cp.add(UserName);
-
-    jtPwd.setBounds(150,100,100,20);
-    cp.add(jtPwd);
-    PassWord.setBounds(10,100,100,20);
-    cp.add(PassWord);
-
-    jbLogin.setBounds(20, 150, 100, 20);
-    jbCancel.setBounds(150, 150, 100, 20);
-    cp.add(jbLogin);
-    cp.add(jbCancel);
-
+    init();
     jbCancel.addActionListener(new ActionListener() {
-
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     });
 
     jbLogin.addActionListener(new ActionListener(){
-
         public void actionPerformed(ActionEvent e){
             String name = jtName.getText();
             String pwd = jtPwd.getText();
@@ -100,7 +75,6 @@ public LoginMain(){
                 LoginFrame.setVisible(false);// 登录窗体不可见
                 MainFrame t = new MainFrame();// 创建主窗体
                 t.setVisible(true);// 使主窗体可见
-
             }
             else{
                 if(0<=count&&count<3){
@@ -127,7 +101,36 @@ public LoginMain(){
 
 }
 
+void init(){
+    //Container cp =
+    LoginFrame.getContentPane();
+    LoginFrame.setLayout(null);
+    setIconImage(Toolkit.getDefaultToolkit().getImage(LoginMain.class.getResource("/imgs/log.png")));
+    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) screensize.getWidth() / 3;
+    int y = (int) screensize.getHeight() / 3;
+    LoginFrame.setLocation(x, y);
 
+
+    jtName.setBounds(150,50,100,20);
+    LoginFrame.add(jtName);
+    UserName.setBounds(10,50,100,20);
+    LoginFrame.add(UserName);
+
+    jtPwd.setBounds(150,100,100,20);
+    LoginFrame.add(jtPwd);
+    PassWord.setBounds(10,100,100,20);
+    LoginFrame.add(PassWord);
+
+    jbLogin.setBounds(20, 150, 100, 20);
+    jbCancel.setBounds(150, 150, 100, 20);
+    LoginFrame.add(jbLogin);
+    LoginFrame.add(jbCancel);
+
+
+
+
+}
 
 /*
 public LoginMain() {// 登录窗体的构造方法

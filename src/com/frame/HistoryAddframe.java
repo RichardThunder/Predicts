@@ -126,7 +126,7 @@ public HistoryAddframe() {// 添加号码对话框的构造方法
         }
     });
     btnNewButton.setIcon(new ImageIcon(HistoryAddframe.class.getResource("/img_btn/a04.png")));// 设置“添加”按钮的图标
-    btnNewButton.setBounds(166, 290, 108, 75);// “添加”按钮的位置以及宽高
+    btnNewButton.setBounds(166, 290, 108, 38);// “添加”按钮的位置以及宽高
     contentPane.add(btnNewButton);// 将“添加”按钮置于自定义背景面板中
 
     JButton button = new JButton("");// “关闭”按钮
@@ -136,7 +136,7 @@ public HistoryAddframe() {// 添加号码对话框的构造方法
         }
     });
     button.setIcon(new ImageIcon(HistoryAddframe.class.getResource("/img_btn/a07.png")));// 设置“关闭”按钮的图标
-    button.setBounds(287, 290, 108, 79);// “关闭”按钮的位置以及宽高
+    button.setBounds(287, 290, 108, 39);// “关闭”按钮的位置以及宽高
     contentPane.add(button);// 将“关闭”按钮置于自定义背景面板中
 
     numberTextField.setText(his.selectNumber() + "");// 设置“开奖期数”文本框中的内容为空

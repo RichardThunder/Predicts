@@ -168,6 +168,97 @@ public Boolean addForecast(Forecast fr) {// 添加机选号码
     }
 }
 
+// 历史记录添加方法
+public Boolean addHistory(History his) {
+    if (con == null) {// Connection对象为空
+        creatConnection();// 建立MySQL数据库的连接
+    }
+    PreparedStatement statement = null;// 声明预编译SQL语句的PreparedStatement对象
+    try {
+        statement = con.prepareStatement(
+                "insert into tb_history (number,a,b,c,d,e,f,g,historytime) values(?,?,?,?,?,?,?,?,?)"); // 定义插入数据库的预处理语句
+        statement.setInt(1, his.getNumber()); // 设置预处理语句的参数值
+        statement.setInt(2, his.getA());
+        statement.setInt(3, his.getB());
+        statement.setInt(4, his.getC());
+        statement.setInt(5, his.getD());
+        statement.setInt(6, his.getE());
+        statement.setInt(7, his.getF());
+        statement.setInt(8, his.getG());
+        statement.setString(9, his.getHistorytime());
+        statement.executeUpdate(); // 执行预处理语句
+        return true;
+    } catch (SQLException e) {
+        System.out.println("历史开奖号码添加失败！");
+        e.printStackTrace();
+        return false;
+
+    } finally {
+        closePreparedStatement(statement);
+    }
+}
+// 修改开奖号码
+public Boolean updataNumber(History his) {
+    if (con == null) {// Connection对象为空
+        creatConnection();// 建立MySQL数据库的连接
+    }
+    PreparedStatement statement = null;// 声明预编译SQL语句的PreparedStatement对象
+    try {
+        statement = con
+                .prepareStatement("update tb_history set a=?,b=?,c=?,d=?,e=?,f=?,g=?,historytime=? where number=?"); // 定义插入数据库的预处理语句
+        statement.setInt(1, his.getA());// 设置预处理语句的参数值
+        statement.setInt(2, his.getB());
+        statement.setInt(3, his.getC());
+        statement.setInt(4, his.getD());
+        statement.setInt(5, his.getE());
+        statement.setInt(6, his.getF());
+        statement.setInt(7, his.getG());
+        statement.setString(8, his.getHistorytime());
+        statement.setInt(9, his.getNumber());
+        statement.execute(); // 执行预处理语句
+        return true;
+    } catch (SQLException e) {
+        System.out.println("开奖号码修改失败！");
+        e.printStackTrace();
+        return false;
+    } finally {
+        closePreparedStatement(statement);
+    }
+}
 
 
+
+// 自动修改获得的奖金
+public Boolean updataMoney(int id, int money) {
+    PreparedStatement statement = null;// 声明预编译SQL语句的PreparedStatement对象
+    if (con == null) {// Connection对象为空
+        creatConnection();// 建立MySQL数据库的连接
+    }
+    try {
+        statement = con.prepareStatement("update tb_forecast set neutron=? where id=?"); // 定义插入数据库的预处理语句
+        statement.setInt(1, money);// 设置预处理语句的参数值
+        statement.setInt(2, id);
+        statement.execute(); // 执行预处理语句
+        return true;
+    } catch (SQLException e) {
+        System.out.println("奖金添加失败！");
+        e.printStackTrace();
+        return false;
+    } finally {
+        closePreparedStatement(statement);
+    }
+}
+
+
+// 关闭预编译SQL语句的PreparedStatement对象
+public static void closePreparedStatement(PreparedStatement stat) {
+    if (stat != null) {
+        try {
+            stat.close();
+        } catch (SQLException e) {
+            System.err.println("关闭数据库语句异常");
+            e.printStackTrace();
+        }
+    }
+}
 }

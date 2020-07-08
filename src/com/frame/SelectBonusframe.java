@@ -77,7 +77,7 @@ public SelectBonusframe() {// 中奖查询对话框的构造方法
             do_btnNewButton_actionPerformed(e);// 为“查询”按钮添加动作事件的监听
         }
     });
-    btnNewButton.setBounds(136, 335, 109, 74);// 设置“查询”按钮的位置和宽高
+    btnNewButton.setBounds(136, 335, 109, 38);// 设置“查询”按钮的位置和宽高
     contentPane.add(btnNewButton);// 把“查询”按钮置于自定义背景面板中
 
     numberField1 = new JTextField();// “开奖期数”文本框
@@ -97,7 +97,7 @@ public SelectBonusframe() {// 中奖查询对话框的构造方法
             do_button_actionPerformed(e);// 为“关闭”按钮添加动作事件的监听
         }
     });
-    button.setBounds(279, 335, 108, 79);// 设置“关闭”按钮的位置和宽高
+    button.setBounds(279, 335, 108, 39);// 设置“关闭”按钮的位置和宽高
     contentPane.add(button);// 把“关闭”按钮置于自定义背景面板中
 
     JLabel label_3 = new JLabel("您所查询该期开奖号码：");// “您所查询该期开奖号码：”标签

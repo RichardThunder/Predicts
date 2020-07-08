@@ -141,7 +141,7 @@ public class ForecastAddframe extends JDialog implements Runnable, ActionListene
 				do_btnNewButton_actionPerformed(e);// 为“购买”按钮添加动作事件的监听
 			}
 		});
-		btnNewButton.setBounds(239, 451, 109, 74);// 设置“购买”按钮的位置和宽高
+		btnNewButton.setBounds(239, 451, 109, 38 );// 设置“购买”按钮的位置和宽高
 		pl.add(btnNewButton);// 把“购买”按钮置于自定义背景面板中
 		// 设置“关闭”按钮的图标
 		btnNewButton_1.setIcon(new ImageIcon(ForecastAddframe.class.getResource("/img_btn/a07.png")));
@@ -150,7 +150,7 @@ public class ForecastAddframe extends JDialog implements Runnable, ActionListene
 				do_btnNewButton_1_actionPerformed(e);// 为“关闭”按钮添加动作事件的监听
 			}
 		});
-		btnNewButton_1.setBounds(389, 451, 108, 79);// 设置“关闭”按钮的位置和宽高
+		btnNewButton_1.setBounds(389, 451, 108, 39);// 设置“关闭”按钮的位置和宽高
 		pl.add(btnNewButton_1);// 把“关闭”按钮置于自定义背景面板中
 		noteLabel.setBounds(507, 413, 202, 20);// 设置“提示”标签的位置和宽高
 		noteLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));// 设置“提示”标签内字体的样式和大小
