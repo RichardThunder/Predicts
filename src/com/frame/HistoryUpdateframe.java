@@ -96,7 +96,7 @@ public HistoryUpdateframe() {// 修改开奖号码对话框的构造方法
             do_btnNewButton_actionPerformed(e);// 为“修改”按钮添加动作事件的监听
         }
     });
-    btnNewButton.setBounds(136, 291, 109, 74);// 设置“修改”按钮的位置以及宽高
+    btnNewButton.setBounds(136, 291, 109, 39);// 设置“修改”按钮的位置以及宽高
     contentPane.add(btnNewButton);// 把“修改”按钮置于自定义背景面板中
 
     JButton button = new JButton("");// “关闭”按钮
