@@ -243,7 +243,7 @@ protected void do_button_actionPerformed(ActionEvent e) {
     ALineChart chart = new ALineChart(null, "第一位开奖号码走势图");
     chart.pack();// 调整窗口的大小，以适应折线图对象的首选大小和布局
     RefineryUtilities.centerFrameOnScreen(chart);// 将折线图对象置于屏幕中间
-    chart.setVisible(true);// 设置折线图窗体对象可见
+   chart.setVisible(true);// 设置折线图窗体对象可见
 }
 
 
