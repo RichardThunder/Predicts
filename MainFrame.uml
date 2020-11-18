@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.frame.MainFrame</OriginalElement>
+  <nodes>
+    <node x="147.27499999999998" y="111.0">java.beans</node>
+    <node x="0.0" y="333.0">com.frame.MainFrame</node>
+    <node x="520.0" y="0.0">javax</node>
+    <node x="191.0" y="222.0">java.awt</node>
+    <node x="188.52499999999998" y="0.0">java.io</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="java.awt" target="java.io">
+      <point x="23.25" y="-30.5" />
+      <point x="260.75" y="197.0" />
+      <point x="268.775" y="197.0" />
+      <point x="268.775" y="86.0" />
+      <point x="258.525" y="86.0" />
+      <point x="28.0" y="30.5" />
+    </edge>
+    <edge source="java.beans" target="java.io">
+      <point x="27.75" y="-30.5" />
+      <point x="0.0" y="30.5" />
+    </edge>
+    <edge source="com.frame.MainFrame" target="java.awt">
+      <point x="0.0" y="-407.5" />
+      <point x="0.0" y="30.5" />
+    </edge>
+    <edge source="java.awt" target="java.beans">
+      <point x="-23.25" y="-30.5" />
+      <point x="214.25" y="197.0" />
+      <point x="202.77499999999998" y="197.0" />
+      <point x="0.0" y="30.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7323481498720037" x="1048.4808859512536" y="549.4013155804125" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
